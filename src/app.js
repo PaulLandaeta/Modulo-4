@@ -4,13 +4,15 @@ const cors = require('cors');
 
 const { NODE_ENV } = require('./config/secrets.js');
 const routes = require('./routes');
-
+const { dbConnection } = require('./database/config');
 const app = express();
 
 // allow cors for development environment
 if (NODE_ENV === 'development') {
   app.use(cors());
 } 
+// Conexion a Base de datos 
+await dbConnection();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
