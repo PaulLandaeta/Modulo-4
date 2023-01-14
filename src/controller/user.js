@@ -44,8 +44,54 @@ const updateUser = async (req, res) => {
   }
 };
 
+const getUser = async (req) => {
+  try {
+    console.log(req.params);
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return {
+        status: 'error',
+        message: 'User not found'
+      };
+    }
+    return {
+      status: 'success',
+      data: user,
+      message: 'User retrieved successfully'
+    };
+  } catch (err) {
+    return {
+      status: 'error',
+      message: err.message
+    };
+  };
+};
+
+const deleteUser = async (req) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+    if (!user) {
+      return {
+        status: 'error',
+        message: 'User not found'
+      };
+    }
+    return {
+      status: 'success',
+      message: 'User deleted successfully'
+    };
+  } catch (err) {
+    return {
+      status: 'error',
+      message: err.message
+    };
+  }
+};
+
 module.exports = {
   userPost,
   usersGet,
   updateUser,
+  getUser,
+  deleteUser
 };
