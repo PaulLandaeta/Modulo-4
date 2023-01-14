@@ -12,7 +12,10 @@ if (NODE_ENV === 'development') {
   app.use(cors());
 } 
 // Conexion a Base de datos 
-await dbConnection();
+const connectDB = async () => {
+    await dbConnection();
+}
+connectDB();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
