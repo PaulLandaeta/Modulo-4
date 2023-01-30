@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const UserSchema = Schema({
-    name: {
+    email: {
         type: String,
         required: [true, 'El correo es obligatorio'],
         unique: true
@@ -9,7 +9,15 @@ const UserSchema = Schema({
     password: {
         type: String, 
         required: [true, 'El password es obligatorio'],
-    }
+    },
+    firstName: {
+        type: String,
+        required: true,
+    },
+    lastName: {
+        type: String,
+        required: true,
+    },
 })
 
 module.exports = model('User', UserSchema);
